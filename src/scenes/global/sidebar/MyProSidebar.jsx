@@ -1,16 +1,13 @@
+// docs https://github.com/azouaoui-med/react-pro-sidebar
 import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import {
-  Box,
-  IconButton,
-  Typography,
-  useTheme,
-  Stack,
-  Avatar,
-} from "@mui/material";
+import { Menu, Sidebar, MenuItem } from "react-pro-sidebar";
+import { useProSidebar } from "react-pro-sidebar";
+
+import { useSidebarContext } from "./sidebarContext";
+
 import { Link } from "react-router-dom";
-import "react-pro-sidebar/dist/css/styles.css";
-import { tokens } from "../../theme";
+import { tokens } from "../../../theme";
+import { useTheme, Box, Typography, IconButton } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -20,66 +17,96 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
+import SwitchRightOutlinedIcon from "@mui/icons-material/SwitchRightOutlined";
+import SwitchLeftOutlinedIcon from "@mui/icons-material/SwitchLeftOutlined";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
+      style={{ color: colors.grey[100] }}
       onClick={() => setSelected(title)}
       icon={icon}
+      routerLink={<Link to={to} />}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
     </MenuItem>
   );
 };
 
-const Sidebar = () => {
+const MyProSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-
+  const { sidebarRTL, setSidebarRTL, sidebarImage } = useSidebarContext();
+  const { collapseSidebar, toggleSidebar, collapsed, broken } = useProSidebar();
   return (
     <Box
       sx={{
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
+        position: "sticky",
+        display: "flex",
+        height: "100vh",
+        top: 0,
+        bottom: 0,
+        zIndex: 10000,
+        "& .sidebar": {
+          border: "none",
         },
-        "& .pro-icon-wrapper": {
+        "& .menu-icon": {
           backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
+        "& .menu-item": {
+          // padding: "5px 35px 5px 20px !important",
+          backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+        "& .menu-anchor": {
+          color: "inherit !important",
+          backgroundColor: "transparent !important",
         },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+        "& .menu-item:hover": {
+          color: `${colors.blueAccent[500]} !important`,
+          backgroundColor: "transparent !important",
+        },
+        "& .menu-item.active": {
+          color: `${colors.greenAccent[500]} !important`,
+          backgroundColor: "transparent !important",
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
+      <Sidebar
+        breakPoint="md"
+        rtl={sidebarRTL}
+        backgroundColor={colors.primary[400]}
+        image={sidebarImage}
+      >
+        <Menu iconshape="square">
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            icon={
+              collapsed ? (
+                <MenuOutlinedIcon onClick={() => collapseSidebar()} />
+              ) : sidebarRTL ? (
+                <SwitchLeftOutlinedIcon
+                  onClick={() => setSidebarRTL(!sidebarRTL)}
+                />
+              ) : (
+                <SwitchRightOutlinedIcon
+                  onClick={() => setSidebarRTL(!sidebarRTL)}
+                />
+              )
+            }
             style={{
               margin: "10px 0 20px 0",
               color: colors.grey[100],
             }}
           >
-            {!isCollapsed && (
+            {!collapsed && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -89,41 +116,50 @@ const Sidebar = () => {
                 <Typography variant="h3" color={colors.grey[100]}>
                   ADMINIS
                 </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
+                <IconButton
+                  onClick={
+                    broken ? () => toggleSidebar() : () => collapseSidebar()
+                  }
+                >
+                  <CloseOutlinedIcon />
                 </IconButton>
               </Box>
             )}
           </MenuItem>
-
-          {!isCollapsed && (
+          {!collapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <Stack>
-                  <Avatar
-                    sx={{ width: "100px", height: "100px" }}
-                    src="https://www.w3schools.com/howto/img_avatar.png"
-                    style={{ cursor: "pointer" }}
-                  />
-                </Stack>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  "& .avater-image": {
+                    backgroundColor: colors.primary[500],
+                  },
+                }}
+              >
+                <img
+                  className="avater-image"
+                  alt="profile user"
+                  width="100px"
+                  height="100px"
+                  src={"../../assets/user.png"}
+                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                />
               </Box>
               <Box textAlign="center">
                 <Typography
-                  variant="h2"
+                  variant="h3"
                   color={colors.grey[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Cesar Beloqui
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Super Admin
+                  Harun Jeylan
                 </Typography>
               </Box>
             </Box>
           )}
-          {/* Menu Items */}
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
               to="/"
@@ -135,7 +171,7 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 20px 5px 20px" }}
             >
               Data
             </Typography>
@@ -164,7 +200,7 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 20px 5px 20px" }}
             >
               Pages
             </Typography>
@@ -193,7 +229,7 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 20px 5px 20px" }}
             >
               Charts
             </Typography>
@@ -227,9 +263,9 @@ const Sidebar = () => {
             />
           </Box>
         </Menu>
-      </ProSidebar>
+      </Sidebar>
     </Box>
   );
 };
 
-export default Sidebar;
+export default MyProSidebar;

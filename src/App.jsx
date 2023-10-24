@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Topbar from "./scenes/global/Topbar";
-import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
 import Invoices from "./scenes/invoices";
@@ -16,6 +15,7 @@ import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import Calendar from "./scenes/calendar";
+import { MyProSidebarProvider } from "./scenes/global/sidebar/sidebarContext";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,8 +25,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <MyProSidebarProvider>
       <div className="app">
-          <Sidebar />
         <main className="content">
           <Topbar />
           <Routes>
@@ -44,6 +44,7 @@ function App() {
           </Routes>
         </main>
       </div>
+      </MyProSidebarProvider>
     </ThemeProvider>
   );
 }

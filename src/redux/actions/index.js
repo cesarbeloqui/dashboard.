@@ -1,4 +1,4 @@
-import { ALGO, TOGGLE_COLOR_MODE } from "./types.js";
+import { ALGO, TOGGLE_COLOR_MODE, SIDEBAR_PROVIDER } from "./types.js";
 import axios from "axios";
 
 export const getMenu = () => {
@@ -22,3 +22,8 @@ export const getMenu = () => {
 };
 
 export const toggleColorMode = () => ({ type: TOGGLE_COLOR_MODE });
+
+export const sidebarProvider = (payload) => ({
+  type: SIDEBAR_PROVIDER,
+  payload,
+});
