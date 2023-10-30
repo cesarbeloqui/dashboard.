@@ -14,30 +14,30 @@ const Team = () => {
     { field: "id", headerName: "ID" },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Nombre",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
       field: "age",
-      headerName: "Age",
+      headerName: "Edad",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "phone",
+      field: "Telefono",
       headerName: "Phone Number",
       flex: 1,
     },
     {
-      field: "email",
+      field: "Email",
       headerName: "Email",
       flex: 1,
     },
     {
       field: "accessLevel",
-      headerName: "Access Level",
+      headerName: "Nivel de Acceso",
       flex: 1,
       renderCell: ({ row: { access } }) => {
         return (
@@ -49,10 +49,10 @@ const Team = () => {
             justifyContent="center"
             backgroundColor={
               access === "admin"
-                ? colors.greenAccent[600]
+                ? colors.green[600]
                 : access === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
+                ? colors.green[700]
+                : colors.green[700]
             }
             borderRadius="4px"
           >
@@ -70,7 +70,7 @@ const Team = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header title="EQUIPO" subtitle="Aqui puedes manipular los users" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -79,21 +79,20 @@ const Team = () => {
             border: "none",
           },
           "& .MuiDataGrid-cell": {
-            borderBottom: "none",
+            borderBottomColor: colors.green[500],
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
+            backgroundColor: colors.green[500],
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.green[500],
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,

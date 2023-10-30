@@ -4,6 +4,7 @@ import { Menu, Sidebar, MenuItem } from "react-pro-sidebar";
 import { useProSidebar } from "react-pro-sidebar";
 
 import { useSidebarContext } from "./sidebarContext";
+import img from "../../../assets/images/users/unnamed.jpg";
 
 import { Link } from "react-router-dom";
 import { tokens } from "../../../theme";
@@ -22,16 +23,14 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import SwitchRightOutlinedIcon from "@mui/icons-material/SwitchRightOutlined";
-import SwitchLeftOutlinedIcon from "@mui/icons-material/SwitchLeftOutlined";
+import ColorLensIcon from "@mui/icons-material/ColorLens";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   return (
     <MenuItem
       active={selected === title}
-      style={{ color: colors.grey[100] }}
+      style={{ color: colors.grey[900] }}
       onClick={() => setSelected(title)}
       icon={icon}
       routerLink={<Link to={to} />}
@@ -42,6 +41,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const MyProSidebar = () => {
+  const devForm = true;
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState("Dashboard");
@@ -64,6 +64,7 @@ const MyProSidebar = () => {
         },
         "& .menu-item": {
           // padding: "5px 35px 5px 20px !important",
+          color: `${colors.grey[900]} !important`,
           backgroundColor: "transparent !important",
         },
         "& .menu-anchor": {
@@ -71,11 +72,11 @@ const MyProSidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .menu-item:hover": {
-          color: `${colors.blueAccent[500]} !important`,
-          backgroundColor: "transparent !important",
+          color: `${colors.green[700]} !important`,
+          backgroundColor: `${colors.green[200]} !important`,
         },
         "& .menu-item.active": {
-          color: `${colors.greenAccent[500]} !important`,
+          color: `${colors.grey[100]} !important`,
           backgroundColor: "transparent !important",
         },
       }}
@@ -83,39 +84,35 @@ const MyProSidebar = () => {
       <Sidebar
         breakPoint="md"
         rtl={sidebarRTL}
-        backgroundColor={colors.primary[400]}
+        backgroundColor={colors.green[400]}
         image={sidebarImage}
       >
         <Menu iconshape="square">
           <MenuItem
-            icon={
-              collapsed ? (
-                <MenuOutlinedIcon onClick={() => collapseSidebar()} />
-              ) : sidebarRTL ? (
-                <SwitchLeftOutlinedIcon
-                  onClick={() => setSidebarRTL(!sidebarRTL)}
-                />
-              ) : (
-                <SwitchRightOutlinedIcon
-                  onClick={() => setSidebarRTL(!sidebarRTL)}
-                />
-              )
-            }
             style={{
               margin: "10px 0 20px 0",
-              color: colors.grey[100],
+              color: colors.grey[900],
             }}
           >
+            {collapsed && (
+              <Box
+                style={{
+                  paddingLeft: "18%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <MenuOutlinedIcon onClick={() => collapseSidebar()} />
+              </Box>
+            )}
             {!collapsed && (
               <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                }}
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
-                </Typography>
                 <IconButton
                   onClick={
                     broken ? () => toggleSidebar() : () => collapseSidebar()
@@ -127,6 +124,14 @@ const MyProSidebar = () => {
             )}
           </MenuItem>
           {!collapsed && (
+            <Box>
+              <Typography variant="h2" color={colors.grey[900]} m="25px">
+                GLC Recursos Naturales
+              </Typography>
+            </Box>
+          )}
+
+          {!collapsed && (
             <Box mb="25px">
               <Box
                 display="flex"
@@ -134,7 +139,7 @@ const MyProSidebar = () => {
                 alignItems="center"
                 sx={{
                   "& .avater-image": {
-                    backgroundColor: colors.primary[500],
+                    backgroundColor: colors.primary[800],
                   },
                 }}
               >
@@ -143,18 +148,18 @@ const MyProSidebar = () => {
                   alt="profile user"
                   width="100px"
                   height="100px"
-                  src={"../../assets/user.png"}
+                  src={img}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h3"
-                  color={colors.grey[100]}
+                  color={colors.grey[900]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Harun Jeylan
+                  Cesar Beloqui
                 </Typography>
               </Box>
             </Box>
@@ -167,10 +172,17 @@ const MyProSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Colores"
+              to="/colores"
+              icon={<ColorLensIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
             <Typography
-              variant="h6"
-              color={colors.grey[300]}
+              variant={collapsed ? "h6" : "h6"}
+              color={colors.primary[900]}
               sx={{ m: "15px 20px 5px 20px" }}
             >
               Data
@@ -198,7 +210,7 @@ const MyProSidebar = () => {
             />
 
             <Typography
-              variant="h6"
+              variant={collapsed ? "h4" : "h6"}
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}
             >
@@ -227,7 +239,7 @@ const MyProSidebar = () => {
             />
 
             <Typography
-              variant="h6"
+              variant={collapsed ? "h4" : "h6"}
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}
             >
