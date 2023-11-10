@@ -181,7 +181,6 @@ export const themeSettings = (mode) => {
       h4: {
         fontFamily: ['Monserrat', 'sans-serif'].join(','),
         fontSize: 20,
-        fontWeight: "bold",
       },
       h5: {
         fontFamily: ['Monserrat', 'sans-serif'].join(','),
