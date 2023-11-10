@@ -16,11 +16,14 @@ import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
-import userImagen from '../../assets/user.png';
+import logoProvinciaNegro from '../../assets/imagenes/iso.svg';
+import logoProvinciaBlanco from '../../assets/imagenes/iso_white.svg';
+import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -38,7 +41,9 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 const Sidebar = () => {
   const theme = useTheme();
+  const mode = theme.palette.mode;
   const colors = tokens(theme.palette.mode);
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState('Dashboard');
 
@@ -76,16 +81,18 @@ const Sidebar = () => {
             {!isCollapsed && (
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="flex-end"
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
+                {/*                 <Typography variant="h3" color={colors.grey[100]}>
                   ADMINIS
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
+                </Typography> */}
+                <Box>
+                  <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                    <MenuOutlinedIcon />
+                  </IconButton>
+                </Box>
               </Box>
             )}
           </MenuItem>
@@ -93,16 +100,22 @@ const Sidebar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={userImagen}
-                  style={{ cursor: 'pointer', borderRadius: '50%' }}
-                />
+                {mode && (
+                  <img
+                    alt="logo"
+                    width="200px"
+                    height="200px"
+                    src={
+                      mode === 'light'
+                        ? logoProvinciaNegro
+                        : logoProvinciaBlanco
+                    }
+                    style={{ cursor: 'pointer', borderRadius: '50%' }}
+                  />
+                )}
               </Box>
               <Box textAlign="center">
-                <Typography
+                {/*                 <Typography
                   variant="h2"
                   color={colors.grey[100]}
                   fontWeight="bold"
@@ -112,21 +125,21 @@ const Sidebar = () => {
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Desarrollador
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : '10%'}>
             <Item
-              title="Dashboard"
+              title="Inicio"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
 
-            <Typography
+            {/*  <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: '15px 0 5px 20px' }}
@@ -218,7 +231,7 @@ const Sidebar = () => {
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </ProSidebar>
