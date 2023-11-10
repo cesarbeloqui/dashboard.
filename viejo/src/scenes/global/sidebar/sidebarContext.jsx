@@ -1,6 +1,6 @@
-import React, { useState, createContext, useContext } from "react";
-import { ProSidebarProvider } from "react-pro-sidebar";
-import MyProSidebar from "./MyProSidebar";
+import React, { useState, createContext, useContext } from 'react';
+import { ProSidebarProvider } from 'react-pro-sidebar';
+import MyProSidebar from './MyProSidebar';
 
 const SidebarContext = createContext({});
 
@@ -25,8 +25,10 @@ export const MyProSidebarProvider = ({ children }) => {
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: sidebarRTL ? "row-reverse" : "row",
+            display: 'inline-flex',
+            flexDirection: sidebarRTL ? 'row-reverse' : 'row',
+            width: '100%',
+            height: '100%',
           }}
         >
           <MyProSidebar />

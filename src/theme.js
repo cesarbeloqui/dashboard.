@@ -1,32 +1,32 @@
-import { useMemo } from "react";
+import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleColorMode } from "./redux/actions/index";
+import { useSelector } from "react-redux";
 
+// color design tokens export
 export const tokens = (mode) => ({
   ...(mode === "dark"
     ? {
         grey: {
-          100: "#d8d8d8",
-          200: "#b1b1b1",
-          300: "#8b8b8b",
-          400: "#646464",
-          500: "#3d3d3d",
-          600: "#313131",
-          700: "#252525",
-          800: "#181818",
-          900: "#0c0c0c",
+          100: "#e0e0e0",
+          200: "#c2c2c2",
+          300: "#a3a3a3",
+          400: "#858585",
+          500: "#666666",
+          600: "#525252",
+          700: "#3d3d3d",
+          800: "#292929",
+          900: "#141414",
         },
         primary: {
-          100: "#d8d8d8",
-          200: "#b1b1b1",
-          300: "#8b8b8b",
-          400: "#646464",
-          500: "#3d3d3d",
-          600: "#313131",
-          700: "#252525",
-          800: "#181818",
-          900: "#0c0c0c",
+          100: "#d0d1d5",
+          200: "#a1a4ab",
+          300: "#727681",
+          400: "#1F2A40",
+          500: "#141b2d",
+          600: "#101624",
+          700: "#0c101b",
+          800: "#080b12",
+          900: "#040509",
         },
         greenAccent: {
           100: "#dbf5ee",
@@ -61,17 +61,6 @@ export const tokens = (mode) => ({
           800: "#2a2d64",
           900: "#151632",
         },
-        green: {
-          900: "#d9edcf",
-          800: "#b3db9f",
-          700: "#8dc870",
-          600: "#67b640",
-          500: "#41a410",
-          400: "#34830d",
-          300: "#27620a",
-          200: "#1a4206",
-          100: "#0d2103",
-        },
       }
     : {
         grey: {
@@ -86,15 +75,15 @@ export const tokens = (mode) => ({
           900: "#e0e0e0",
         },
         primary: {
-          900: "#d8d8d8",
-          800: "#b1b1b1",
-          700: "#8b8b8b",
-          600: "#646464",
-          500: "#3d3d3d",
-          400: "#313131",
-          300: "#252525",
-          200: "#181818",
-          100: "#0c0c0c",
+          100: "#040509",
+          200: "#080b12",
+          300: "#0c101b",
+          400: "#f2f0f0", // manually changed
+          500: "#141b2d",
+          600: "#1F2A40",
+          700: "#727681",
+          800: "#a1a4ab",
+          900: "#d0d1d5",
         },
         greenAccent: {
           100: "#0f2922",
@@ -129,30 +118,18 @@ export const tokens = (mode) => ({
           800: "#c3c6fd",
           900: "#e1e2fe",
         },
-        green: {
-          900: "#d9edcf",
-          800: "#b3db9f",
-          700: "#8dc870",
-          600: "#67b640",
-          500: "#41a410",
-          400: "#34830d",
-          300: "#27620a",
-          200: "#1a4206",
-          100: "#0d2103",
-        },
       }),
 });
 
-/* nui theme settings */
-
+// mui theme settings
 export const themeSettings = (mode) => {
   const colors = tokens(mode);
-
   return {
     palette: {
       mode: mode,
       ...(mode === "dark"
         ? {
+            // palette values for dark mode
             primary: {
               main: colors.primary[500],
             },
@@ -169,6 +146,7 @@ export const themeSettings = (mode) => {
             },
           }
         : {
+            // palette values for light mode
             primary: {
               main: colors.primary[100],
             },
@@ -186,40 +164,38 @@ export const themeSettings = (mode) => {
           }),
     },
     typography: {
-      fontFamily: ["Roboto", "sans-serif"].join(","),
+      fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
       fontSize: 12,
       h1: {
-        fontFamily: ["Roboto", "sans-serif"].join(","),
-        fontSize: 48,
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 40,
       },
       h2: {
-        fontFamily: ["Roboto", "sans-serif"].join(","),
-        fontSize: 36,
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 32,
       },
       h3: {
-        fontFamily: ["Roboto", "sans-serif"].join(","),
-        fontSize: 28,
-      },
-      h4: {
-        fontFamily: ["Roboto", "sans-serif"].join(","),
-        fontSize: 26,
-      },
-      h5: {
-        fontFamily: ["Roboto", "sans-serif"].join(","),
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
         fontSize: 24,
       },
+      h4: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 20,
+      },
+      h5: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 16,
+      },
       h6: {
-        fontFamily: ["Roboto", "sans-serif"].join(","),
-        fontSize: 22,
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 14,
       },
     },
   };
 };
 
-/* redux for color mode */
-
-/* 
-export const ColorModeContext = React.createContext({
+// context for color mode
+/* export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
 
@@ -235,10 +211,8 @@ export const useMode = () => {
   );
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-
-  return [theme, colorMode]; // return theme and colorMode context values to be used in other components.
-}; 
-*/
+  return [theme, colorMode];
+}; */
 
 export const useMode = () => {
   const mode = useSelector((state) => state.mode);
@@ -247,3 +221,4 @@ export const useMode = () => {
 
   return { theme };
 };
+
