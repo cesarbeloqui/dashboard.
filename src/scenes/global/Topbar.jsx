@@ -32,7 +32,10 @@ const Topbar = () => {
             <SearchIcon />
           </IconButton>
         </Box>
-        <IconButton onClick={toggleModeColor}>
+
+        {/* ICONOS */}
+                {/* icono para cambiar el tema, lo desactivo para la primera presentacion */}
+        <IconButton /* onClick={toggleModeColor} */>
           {theme.palette.mode === 'dark' ? (
             <DarkModeOutlinedIcon />
           ) : (
