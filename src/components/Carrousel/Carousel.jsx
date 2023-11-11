@@ -1,9 +1,12 @@
-import React from 'react';
+
 import Carousel from 'react-material-ui-carousel';
 import slider1 from '../../assets/imagenes/ASTROTURISMO.jpg';
 import slider2 from '../../assets/imagenes/2-Paseo-en-Botador.jpg';
 import slider3 from '../../assets/imagenes/3-Nado-a-caballo.jpg';
 import slider4 from '../../assets/imagenes/4-Avistaje-de-Aves.jpg';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { CardActionArea, CardActions, CardMedia } from '@mui/material';
 import {
   Box,
   IconButton,
@@ -16,7 +19,11 @@ import {
 import { tokens } from '../../theme';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import useWindowSize from '../utils/useWindowSize';
+import resumenTexto from './resumenTexto';
+
 export default function Example(props) {
+  const { height, width } = useWindowSize();
   var items = [
     {
       name: 'La localidad de Mantilla se prepara para vivir su 31° edición del festival “Yatay“',
@@ -43,14 +50,6 @@ export default function Example(props) {
       image: slider4,
     },
   ];
-  const iconoSiguiente = () => {
-    return (
-      <IconButton>
-        <ArrowForwardIosIcon />
-      </IconButton>
-    );
-  };
-
   return (
     <Carousel
       sx={{
@@ -60,7 +59,7 @@ export default function Example(props) {
       NextIcon={<ArrowForwardIosIcon fontSize="inherit" />}
       PrevIcon={<ArrowBackIosNewIcon fontSize="inherit" />}
       stopAutoPlayOnHover={true}
-      animation="zoom"
+      animation="fade"
       navButtonsAlwaysVisible={true}
       fullHeightHover={true}
       navButtonsProps={{
@@ -74,7 +73,7 @@ export default function Example(props) {
           position: 'absolute',
           zIndex: '99',
           left: 0,
-          margin: '100px auto auto 400px',
+          margin: width > 600 ? '50px auto auto 100px' : '15px auto auto 15px',
         },
       }}
       duration={2000}
@@ -89,6 +88,10 @@ export default function Example(props) {
 export function Item(props) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const fontSizeCard = {
+    titleFontSize: 2, // En em unidades
+    descriptionFontSize: 1.07, // En em unidades
+  };
   return (
     <Paper
       style={{
@@ -99,22 +102,70 @@ export function Item(props) {
         height: 'auto',
       }}
     >
-      <Box
-        style={{
-          width: '100%',
-          height: '75vh',
-          overflow: 'hidden',
-          display: 'flex',
-        }}
-      >
-        <img
-          src={props.item.image}
-          alt={props.item.name}
-          style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-        />
-      </Box>
-      <Typography variant="h2">{props.item.name}</Typography>
-      <Typography variant="h4">{props.item.description}</Typography>
+      <Card sx={{ borderRadius: '0' }}>
+        <CardActionArea>
+          <CardMedia
+            sx={{
+              width: '100%',
+              height: '50vh',
+              overflow: 'hidden',
+              display: 'flex',
+              objectFit: 'cover',
+              borderRadius: '0',
+              position: 'relative', // Agregamos esta propiedad para establecer el contexto de apilamiento
+            }}
+            component="img"
+            image={props.item.image}
+            alt="green iguana"
+          />
+          <CardContent
+            sx={{
+              position: 'absolute',
+              color: theme.palette.grey[400],
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.664)',
+              maxWidth: '40vw',
+              borderRadius: '0.5em',
+              height: '20vh',
+              margin: '0 0 1.5em 1.5em',
+              '@media (max-width: 600px)': {
+                maxWidth: '90vw',
+                height: '30vh',
+                margin: '0',
+                borderRadius: '0',
+                width: '100%',
+              },
+            }}
+          >
+            <Typography
+              gutterBottom
+
+              sx={{
+                fontSize: `${fontSizeCard.titleFontSize}rem`,
+                '@media (max-width: 600px)': {
+                  fontSize: `${fontSizeCard.titleFontSize - 0.9}rem`,
+                },
+              }}
+            >
+              {/* esta funcion recibe el string que quiero resumir y en el segundo argumento la cantidad de caracteres que quiero mostrar y el tercer argumento es el string que quiero que se muestra al final */}
+              {resumenTexto(props.item.name, 102, "...")}
+            </Typography>
+            <Typography
+              sx={{
+                maxHeight: '100%',
+                overflow: 'hidden',
+                fontSize: `${fontSizeCard.descriptionFontSize}rem`,
+                textOverflow: 'ellipsis',
+                '@media (max-width: 600px)': {
+                  fontSize: `${fontSizeCard.descriptionFontSize - 0.3}rem`,
+                },
+              }}
+            >
+              {resumenTexto(props.item.description, 273, "...")}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </Paper>
   );
 }

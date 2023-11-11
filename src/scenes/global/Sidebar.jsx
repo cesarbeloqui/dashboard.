@@ -18,7 +18,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import logoProvinciaNegro from '../../assets/imagenes/iso.svg';
 import logoProvinciaBlanco from '../../assets/imagenes/iso_white.svg';
-import { useSelector } from 'react-redux';
+import imageFondo from '../../assets/imagenes/Captura de pantalla 2023-11-11 125703.png';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -67,7 +67,12 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar
+        collapsed={isCollapsed}
+        image={imageFondo}
+        onToggle={false}
+        breakPoint="xs"
+      >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
