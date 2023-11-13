@@ -1,4 +1,3 @@
-
 import Carousel from 'react-material-ui-carousel';
 import slider1 from '../../assets/imagenes/ASTROTURISMO.jpg';
 import slider2 from '../../assets/imagenes/2-Paseo-en-Botador.jpg';
@@ -38,7 +37,7 @@ export default function Example(props) {
       image: slider2,
     },
     {
-      name: 'Esquina se prepara para vivir su 37° Fiesta Nacional del Pacú',
+      name: 'Esquina se prepara para vivir su 37° Fiesta Nacional',
       description:
         'Esta mañana se presentó en Casa de Gobierno, lo que será este evento de pesca deportiva con devolución en la localidad de Esquina los días 17, 18 y 19 de febrero. Por lo tanto, estuvo presente el Subsecretario de Turismo Carlos Gatti, el Subsecretario de Promoción e inversiones turísticas, Klaus Liebig en representación de la Ministra de Turismo Alejandra Eliciri, quien no pudo asistir por compromisos de agenda. Ademas estuvo el Presidente del Club Náutico de Esquina Omar Bordón; el encargado de la Fiscalización del concurso Juan Agustín Maggione: y la encargada del festival Farides Rosado.',
       image: slider3,
@@ -99,7 +98,7 @@ export function Item(props) {
         flexDirection: 'column',
         backgroundColor: colors.primary[400],
         width: '100%',
-        height: 'auto',
+        height: '50vh',
       }}
     >
       <Card sx={{ borderRadius: '0' }}>
@@ -116,21 +115,23 @@ export function Item(props) {
             }}
             component="img"
             image={props.item.image}
-            alt="green iguana"
+            alt="slide"
           />
           <CardContent
             sx={{
               position: 'absolute',
+              display: 'flex',
+              flexDirection: 'column',
               color: theme.palette.grey[400],
               bottom: 0,
               backgroundColor: 'rgba(0, 0, 0, 0.664)',
               maxWidth: '40vw',
               borderRadius: '0.5em',
-              height: '20vh',
+              height: '22vh',
               margin: '0 0 1.5em 1.5em',
               '@media (max-width: 600px)': {
                 maxWidth: '90vw',
-                height: '30vh',
+                height: '17vh',
                 margin: '0',
                 borderRadius: '0',
                 width: '100%',
@@ -139,29 +140,52 @@ export function Item(props) {
           >
             <Typography
               gutterBottom
-
+              variant="h4Bold"
               sx={{
+                overflow: 'hidden',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+                "@media (max-width:600px)":{
+                  WebkitLineClamp: 1,
+                }
+              }}
+
+              /*               sx={{
                 fontSize: `${fontSizeCard.titleFontSize}rem`,
-                '@media (max-width: 600px)': {
+          '@media (max-width: 600px)': {
                   fontSize: `${fontSizeCard.titleFontSize - 0.9}rem`,
                 },
-              }}
+              }} */
             >
               {/* esta funcion recibe el string que quiero resumir y en el segundo argumento la cantidad de caracteres que quiero mostrar y el tercer argumento es el string que quiero que se muestra al final */}
-              {resumenTexto(props.item.name, 102, "...")}
+              {props.item.name}
             </Typography>
             <Typography
+              variant="h6"
               sx={{
-                maxHeight: '100%',
                 overflow: 'hidden',
-                fontSize: `${fontSizeCard.descriptionFontSize}rem`,
                 textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+                '@media (max-width:600px)': {
+                  WebkitLineClamp: 1,
+                },
+              }}
+              /*               sx={{
                 '@media (max-width: 600px)': {
                   fontSize: `${fontSizeCard.descriptionFontSize - 0.3}rem`,
                 },
-              }}
+              }} */
             >
-              {resumenTexto(props.item.description, 273, "...")}
+              {props.item.description}
+            </Typography>
+            <Typography
+              sx={{ display: 'flex', alignSelf: 'flex-end' }}
+              variant="h6Bold"
+            >
+              Ver mas
             </Typography>
           </CardContent>
         </CardActionArea>

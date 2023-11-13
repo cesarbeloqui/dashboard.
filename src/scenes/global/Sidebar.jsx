@@ -19,6 +19,8 @@ import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import logoProvinciaNegro from '../../assets/imagenes/iso.svg';
 import logoProvinciaBlanco from '../../assets/imagenes/iso_white.svg';
 import imageFondo from '../../assets/imagenes/Captura de pantalla 2023-11-11 125703.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeIsCollapsed } from '../../redux/actions/index';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -43,9 +45,13 @@ const Sidebar = () => {
   const theme = useTheme();
   const mode = theme.palette.mode;
   const colors = tokens(theme.palette.mode);
+  const dispatch = useDispatch();
+  const isCollapsed = useSelector((state) => state.isCollapsed);
+  const setIsCollapsed = () => {
+    dispatch(changeIsCollapsed());
+  };
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState('Dashboard');
+  const [selected, setSelected] = useState('Inicio');
 
   return (
     <Box
@@ -75,32 +81,25 @@ const Sidebar = () => {
       >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: '10px 0 20px 0',
-              color: colors.grey[100],
-            }}
+          <Box
+            style={
+              isCollapsed
+                ? {
+                    margin: '10px 0 20px 0',
+                    color: colors.grey[100],
+                  }
+                : {
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                  }
+            }
           >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="flex-end"
-                alignItems="center"
-                ml="15px"
-              >
-                {/*                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
-                </Typography> */}
-                <Box>
-                  <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <MenuOutlinedIcon />
-                  </IconButton>
-                </Box>
-              </Box>
-            )}
-          </MenuItem>
+            <Item
+              icon={<MenuOutlinedIcon />}
+              selected={isCollapsed}
+              setSelected={setIsCollapsed}
+            />
+          </Box>
 
           {!isCollapsed && (
             <Box mb="25px">

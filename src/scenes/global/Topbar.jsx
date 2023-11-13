@@ -7,8 +7,9 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch } from 'react-redux';
-import { toggleColorMode } from '../../redux/actions/index';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleColorMode, changeIsCollapsed } from '../../redux/actions/index';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -17,9 +18,21 @@ const Topbar = () => {
   const toggleModeColor = () => {
     dispatch(toggleColorMode());
   };
+  const { width, height } = useSelector((state) => state.sizeWindows);
+  const { isCollapsed } = useSelector((state) => state.isCollapsed);
+
   return (
     <Box display="flex" justifyContent="flex-end" p={2}>
       <Box display="flex">
+        {width < 480 && (
+          <IconButton
+            onClick={() => {
+              dispatch(changeIsCollapsed());
+            }}
+          >
+            <MenuOutlinedIcon />
+          </IconButton>
+        )}
         {/* SEARCH BAR */}
         <Box
           display="flex"
@@ -34,8 +47,8 @@ const Topbar = () => {
         </Box>
 
         {/* ICONOS */}
-                {/* icono para cambiar el tema, lo desactivo para la primera presentacion */}
-        <IconButton /* onClick={toggleModeColor} */>
+        {/* icono para cambiar el tema, lo desactivo para la primera presentacion */}
+        <IconButton onClick={toggleModeColor}>
           {theme.palette.mode === 'dark' ? (
             <DarkModeOutlinedIcon />
           ) : (

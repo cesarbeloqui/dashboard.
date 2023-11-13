@@ -129,7 +129,7 @@ export const themeSettings = (mode) => {
       mode: mode,
       ...(mode === 'dark'
         ? {
-            // palette values for dark mode
+            // valores de la paleta para el modo oscuro
             primary: {
               main: colors.primary[500],
             },
@@ -146,7 +146,7 @@ export const themeSettings = (mode) => {
             },
           }
         : {
-            // palette values for light mode
+            // valores de la paleta para el modo claro
             primary: {
               main: colors.primary[100],
             },
@@ -164,31 +164,61 @@ export const themeSettings = (mode) => {
           }),
     },
     typography: {
-      fontFamily: ['Monserrat', 'sans-serif'].join(','),
-      fontSize: 14,
+      fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      fontSize: 16,
       h1: {
-        fontFamily: ['Monserrat', 'sans-serif', 'bold'].join(','),
-        fontSize: 40,
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '2.5rem',
       },
       h2: {
-        fontFamily: ['Monserrat', 'sans-serif'].join(','),
-        fontSize: 32,
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '2rem',
       },
       h3: {
-        fontFamily: ['Monserrat', 'sans-serif'].join(','),
-        fontSize: 24,
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1.5rem',
       },
       h4: {
-        fontFamily: ['Monserrat', 'sans-serif'].join(','),
-        fontSize: 20,
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1.25rem',
       },
       h5: {
-        fontFamily: ['Monserrat', 'sans-serif'].join(','),
-        fontSize: 16,
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1rem',
       },
       h6: {
-        fontFamily: ['Monserrat', 'sans-serif'].join(','),
-        fontSize: 14,
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '0.875rem',
+      },
+      h1Bold: {
+        fontFamily: ['Montserrat', 'sans-serif', 'bold'].join(','),
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+      },
+      h2Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '2rem',
+        fontWeight: 'bold',
+      },
+      h3Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+      },
+      h4Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1.25rem',
+        fontWeight: 'bold',
+      },
+      h5Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1rem',
+        fontWeight: 'bold',
+      },
+      h6Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '0.875rem',
+        fontWeight: 'bold',
       },
     },
   };
@@ -221,3 +251,39 @@ export const useMode = () => {
 
   return { theme };
 };
+
+
+
+/* 
+      h1Bold: {
+        fontFamily: ['Montserrat', 'sans-serif', 'bold'].join(','),
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+      },
+      h2Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '2rem',
+        fontWeight: 'bold',
+      },
+      h3Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+      },
+      h4Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1.25rem',
+        fontWeight: 'bold',
+      },
+      h5Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '1rem',
+        fontWeight: 'bold',
+      },
+      h6Bold: {
+        fontFamily: ['Montserrat', 'sans-serif'].join(','),
+        fontSize: '0.875rem',
+        fontWeight: 'bold',
+      },
+
+*/

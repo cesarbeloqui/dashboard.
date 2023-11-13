@@ -1,4 +1,4 @@
-import { ALGO, TOGGLE_COLOR_MODE, SIDEBAR_PROVIDER } from "./types.js";
+import { ALGO, TOGGLE_COLOR_MODE, SIDEBAR_PROVIDER, WINDOW_SIZE, IS_COLLAPSED  } from "./types.js";
 import axios from "axios";
 
 export const getMenu = () => {
@@ -22,8 +22,22 @@ export const getMenu = () => {
 };
 
 export const toggleColorMode = () => ({ type: TOGGLE_COLOR_MODE });
+export const sizeWindows = () => {
+  return (dispatch) => { 
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const payload = { width, height };
+    return dispatch({ type: WINDOW_SIZE, payload }); 
+   
+   }
+};
+
 
 export const sidebarProvider = (payload) => ({
   type: SIDEBAR_PROVIDER,
   payload,
 });
+
+export const changeIsCollapsed = () => {
+  return { type: IS_COLLAPSED };
+}
