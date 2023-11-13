@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleColorMode, changeIsCollapsed } from '../../redux/actions/index';
+import LanguageIcon from '@mui/icons-material/Language';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -22,8 +23,14 @@ const Topbar = () => {
   const { isCollapsed } = useSelector((state) => state.isCollapsed);
 
   return (
-    <Box display="flex" justifyContent="flex-end" p={2}>
-      <Box display="flex">
+    <Box display="flex" justifyContent="space-between" p={2}>
+      <Box>
+        <IconButton>
+          <LanguageIcon />
+        </IconButton>
+      </Box>
+
+      <Box display="flex" justifyContent="flex-end">
         {width < 480 && (
           <IconButton
             onClick={() => {

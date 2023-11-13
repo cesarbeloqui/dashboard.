@@ -22,9 +22,9 @@ const Dashboard = () => {
   return (
     <Box m="20px">
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      {/*       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Inicio" subtitle="Bienvenido a la web a de Licencias" />
-      </Box>
+      </Box> */}
 
       {/* GRID & CHARTS */}
       <Box>
