@@ -21,8 +21,8 @@ export const tokens = (mode) => ({
           100: '#e7e5e4',
           200: '#d6d3d1',
           300: '#a8a29e',
-          400: '#78716c',
-          500: '#57534e',
+          400: '#292524',
+          500: '#44403c',
           600: '#44403c',
           700: '#292524',
           800: '#1c1917',
@@ -60,6 +60,17 @@ export const tokens = (mode) => ({
           700: '#3e4396',
           800: '#2a2d64',
           900: '#151632',
+        },
+        green: {
+          100: '#39A935',
+          200: '#39A935',
+          300: '#39A935',
+          400: '#39A935',
+          500: '#39A935',
+          600: '#39A935',
+          700: '#39A935',
+          800: '#39A935',
+          900: '#39A935',
         },
       }
     : {
@@ -118,6 +129,17 @@ export const tokens = (mode) => ({
           800: '#c3c6fd',
           900: '#e1e2fe',
         },
+        green: {
+          100: '#39A935',
+          200: '#39A935',
+          300: '#39A935',
+          400: '#39A935',
+          500: '#39A935',
+          600: '#39A935',
+          700: '#39A935',
+          800: '#39A935',
+          900: '#39A935',
+        },
       }),
 });
 
@@ -134,7 +156,7 @@ export const themeSettings = (mode) => {
               main: colors.primary[500],
             },
             secondary: {
-              main: colors.greenAccent[500],
+              main: colors.green[500],
             },
             neutral: {
               dark: colors.grey[700],
@@ -144,6 +166,11 @@ export const themeSettings = (mode) => {
             background: {
               default: colors.primary[500],
             },
+            red: {
+              dark: colors.grey[700],
+              main: colors.redAccent[500],
+              light: colors.grey[100],
+            }
           }
         : {
             // valores de la paleta para el modo claro
@@ -161,6 +188,11 @@ export const themeSettings = (mode) => {
             background: {
               default: '#fcfcfc',
             },
+            red: {
+              dark: colors.grey[700],
+              main: colors.redAccent[600],
+              light: colors.grey[100],
+            }
           }),
     },
     typography: {
@@ -251,8 +283,6 @@ export const useMode = () => {
 
   return { theme };
 };
-
-
 
 /* 
       h1Bold: {

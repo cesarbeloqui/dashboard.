@@ -9,7 +9,6 @@ import {
 const initialState = {
   algo: null,
   mode: 'light',
-  sidebarProvider: {},
   sizeWindows: {},
   isCollapsed: true,
 };
@@ -21,8 +20,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         algo: payload,
       };
-    case SIDEBAR_PROVIDER:
-      return { ...state, sidebarProvider: payload };
     case TOGGLE_COLOR_MODE:
       return { ...state, mode: state.mode === 'light' ? 'dark' : 'light' };
     case WINDOW_SIZE:

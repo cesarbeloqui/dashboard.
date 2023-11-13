@@ -33,10 +33,7 @@ export const sizeWindows = () => {
 };
 
 
-export const sidebarProvider = (payload) => ({
-  type: SIDEBAR_PROVIDER,
-  payload,
-});
+
 
 export const changeIsCollapsed = () => {
   return { type: IS_COLLAPSED };

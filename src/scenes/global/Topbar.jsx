@@ -1,4 +1,4 @@
-import { Box, IconButton, useTheme } from '@mui/material';
+import { Badge, Box, IconButton, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
 import InputBase from '@mui/material/InputBase';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -11,6 +11,10 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleColorMode, changeIsCollapsed } from '../../redux/actions/index';
 import LanguageIcon from '@mui/icons-material/Language';
+import MenuButton from '../../components/MenuButton';
+import AR from '../../assets/imagenes/AR.svg';
+import US from '../../assets/imagenes/US.svg';
+import BR from '../../assets/imagenes/BR.svg';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -21,13 +25,65 @@ const Topbar = () => {
   };
   const { width, height } = useSelector((state) => state.sizeWindows);
   const { isCollapsed } = useSelector((state) => state.isCollapsed);
+  const onClick = () => {
+    console.log('Me estan haciendo click');
+  };
+  const itemsMenuLenguaje = [
+    {
+      name: 'Español',
+      link: '/español',
+      onClick: onClick,
+      icon: () => (
+        <img
+          src={AR}
+          alt="pais"
+          type="svg"
+          style={{
+            width: '20px',
+            height: 'auto',
+            marginRight: '15px',
+          }}
+        />
+      ),
+    },
+    {
+      name: 'Inglés',
+      link: '/ingles',
+      onClick: onClick,
+      icon: () => (
+        <img
+          src={US}
+          alt="pais"
+          style={{
+            width: '20px',
+            height: 'auto',
+            marginRight: '15px',
+          }}
+        />
+      ),
+    },
+    {
+      name: 'Portugués',
+      link: '/portugues',
+      onClick: onClick,
+      icon: () => (
+        <img
+          src={BR}
+          alt="pais"
+          style={{
+            width: '20px',
+            height: 'auto',
+            marginRight: '15px',
+          }}
+        />
+      ),
+    },
+  ];
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      <Box>
-        <IconButton>
-          <LanguageIcon />
-        </IconButton>
+      <Box display="flex" flexDirection="row">
+        <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
       </Box>
 
       <Box display="flex" justifyContent="flex-end">
@@ -63,7 +119,9 @@ const Topbar = () => {
           )}
         </IconButton>
         <IconButton>
-          <NotificationsOutlinedIcon />
+          <Badge badgeContent={4} color="warning">
+            <NotificationsOutlinedIcon />
+          </Badge>
         </IconButton>
         <IconButton>
           <SettingsOutlinedIcon />
