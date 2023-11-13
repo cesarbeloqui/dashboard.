@@ -75,7 +75,7 @@ const Sidebar = () => {
     >
       <ProSidebar
         collapsed={isCollapsed}
-        image={imageFondo}
+        /* image={imageFondo} */
         onToggle={false}
         breakPoint="xs"
       >
