@@ -1,29 +1,64 @@
 import { Fragment, useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Divider,
+  IconButton,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from '../../theme';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
-import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
-import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import logoProvinciaNegro from '../../assets/imagenes/iso.svg';
 import logoProvinciaBlanco from '../../assets/imagenes/iso_white.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeIsCollapsed } from '../../redux/actions/index';
+import {
+  HomeOutlined,
+  MenuOutlined,
+  Login,
+  AppRegistrationOutlined,
+  Folder,
+  Call,
+  LocalTaxi,
+} from '@mui/icons-material';
+import LinkIcon from '@mui/icons-material/Link';
 
 export const lists = [
   [
-    { link: '/', text: 'Inicio', icon: <HomeOutlinedIcon /> },
+    { link: '/', text: 'Inicio', icon: <HomeOutlined />, tip: '' },
+    {
+      text: 'Ingresar',
+      tip: '',
+      link: '/ingreso',
+      icon: <Login />,
+    },
+    {
+      text: 'Registrarse',
+      tip: '',
+      link: '/registrarse',
+      icon: <AppRegistrationOutlined />,
+    },
+    {
+      text: 'Normativa',
+      tip: '',
+      link: '/normativa',
+      icon: <Folder />,
+    },
+    {
+      text: 'Links',
+      tip: '',
+      link: '/links',
+      icon: <LinkIcon />,
+    },
+    {
+      text: 'Denuncias',
+      tip: '',
+      link: '/denuncias',
+      icon: <LocalTaxi />, //parece un auto de policia
+    },
     /*     { link: '/starred', text: 'Starred', icon: <HomeOutlinedIcon /> },
     { link: '/send-email', text: 'Send email', icon: <HomeOutlinedIcon /> },
     { link: '/drafts', text: 'Drafts', icon: <HomeOutlinedIcon /> },
@@ -40,7 +75,7 @@ export const lists = [
   ], */
 ];
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, selected, setSelected, tip }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -52,6 +87,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       }}
       onClick={() => setSelected(title)}
       icon={icon}
+      popperarrow={false}
     >
       <Typography variant="h4">{title}</Typography>
       <Link to={to} />
@@ -108,7 +144,7 @@ const Sidebar = () => {
             }
           >
             <Item
-              icon={<MenuOutlinedIcon />}
+              icon={<MenuOutlined />}
               selected={isCollapsed}
               setSelected={setIsCollapsed}
             />
@@ -154,6 +190,7 @@ const Sidebar = () => {
                         icon={item.icon}
                         selected={selected}
                         setSelected={setSelected}
+                        tip={item.tip}
                       />
                     );
                   })}

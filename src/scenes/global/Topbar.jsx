@@ -1,4 +1,13 @@
-import { Badge, Box, IconButton, useTheme } from '@mui/material';
+import {
+  Badge,
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  Stack,
+  Tooltip,
+  useTheme,
+} from '@mui/material';
 import { tokens } from '../../theme';
 import InputBase from '@mui/material/InputBase';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -15,7 +24,42 @@ import MenuButton from '../../components/MenuButton';
 import AR from '../../assets/imagenes/AR.svg';
 import US from '../../assets/imagenes/US.svg';
 import BR from '../../assets/imagenes/BR.svg';
-import SwipeableTemporaryDrawer from "../global/SwipeableTemporaryDrawer"
+import SwipeableTemporaryDrawer from '../global/SwipeableTemporaryDrawer';
+import { MenuItem } from 'react-pro-sidebar';
+import { Link } from 'react-router-dom';
+
+const buttons = [
+/*   {
+    text: 'Ingresar',
+    tip: '',
+    link: '/ingreso',
+    icon:"",
+  },
+  {
+    text: 'Registrarse',
+    tip: '',
+    link: '/registrarse',
+    icon:"",
+  },
+  {
+    text: 'Normativa vigente',
+    tip: '',
+    link: '/normativa',
+    icon:"",
+  },
+  {
+    text: 'Links de Interés',
+    tip: '',
+    link: '/links',
+    icon:"",
+  },
+  {
+    text: 'Denuncias',
+    tip: '',
+    link: '/denuncias',
+    icon:"",
+  }, */
+];
 
 const Topbar = () => {
   const theme = useTheme();
@@ -31,10 +75,10 @@ const Topbar = () => {
   };
   const itemsMenuLenguaje = [
     {
-      name: 'Español',
+      text: 'Español',
       link: '/español',
       onClick: onClick,
-      icon: () => (
+      icon: (
         <img
           src={AR}
           alt="pais"
@@ -48,10 +92,10 @@ const Topbar = () => {
       ),
     },
     {
-      name: 'Inglés',
+      text: 'Inglés',
       link: '/ingles',
       onClick: onClick,
-      icon: () => (
+      icon: (
         <img
           src={US}
           alt="pais"
@@ -64,10 +108,10 @@ const Topbar = () => {
       ),
     },
     {
-      name: 'Portugués',
+      text: 'Portugués',
       link: '/portugues',
       onClick: onClick,
-      icon: () => (
+      icon: (
         <img
           src={BR}
           alt="pais"
@@ -85,17 +129,33 @@ const Topbar = () => {
     <Box display="flex" justifyContent="space-between" p={2}>
       {width > 480 && (
         <Box display="flex" flexDirection="row">
-          <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
+          <MenuButton
+            icon={<LanguageIcon />}
+            items={itemsMenuLenguaje}
+            tip="Cambiar idioma"
+          />
+
+          {buttons.map((button) => (
+            <Box component={Link} margin="0px 10px 0px 10px" to={button.link}>
+              <Tooltip title={button.tip}>
+                <Button>{button.text}</Button>
+              </Tooltip>
+            </Box>
+          ))}
         </Box>
       )}
 
       <Box display="flex" justifyContent="flex-end">
-        { width < 480 && (
+        {width < 480 && (
           <>
             <SwipeableTemporaryDrawer>
               <MenuOutlinedIcon />
-              </SwipeableTemporaryDrawer>
-            <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
+            </SwipeableTemporaryDrawer>
+            <MenuButton
+              icon={<LanguageIcon />}
+              items={itemsMenuLenguaje}
+              tip="Cambiar idioma"
+            />
           </>
         )}
         {/* SEARCH BAR */}

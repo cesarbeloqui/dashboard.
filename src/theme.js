@@ -72,6 +72,14 @@ export const tokens = (mode) => ({
           800: '#39A935',
           900: '#39A935',
         },
+        button: {
+          background: 'black',
+          color: 'white',
+          hover: {
+            background: '#39A935',
+            color: 'white',
+          },
+        },
       }
     : {
         grey: {
@@ -140,6 +148,14 @@ export const tokens = (mode) => ({
           800: '#39A935',
           900: '#39A935',
         },
+        button: {
+          background: '#3d3d3d',
+          color: 'white',
+          hover: {
+            background: '#39A935',
+            color: 'white',
+          },
+        },
       }),
 });
 
@@ -170,7 +186,7 @@ export const themeSettings = (mode) => {
               dark: colors.grey[700],
               main: colors.redAccent[500],
               light: colors.grey[100],
-            }
+            },
           }
         : {
             // valores de la paleta para el modo claro
@@ -192,8 +208,33 @@ export const themeSettings = (mode) => {
               dark: colors.grey[700],
               main: colors.redAccent[600],
               light: colors.grey[100],
-            }
+            },
           }),
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          /* 
+                  button: {
+          background: "black",
+          color: "white",
+          hover: {
+            background: "#39A935",
+            color: "white",
+          },
+        },
+          */
+          root: {
+            textTransform: 'none',
+            backgroundColor: colors.button.background,
+            color: colors.button.color,
+            '&:hover': {
+              backgroundColor: colors.button.hover.background,
+              color: colors.button.hover.color,
+            },
+          },
+        },
+      },
     },
     typography: {
       fontFamily: ['Montserrat', 'sans-serif'].join(','),
@@ -283,37 +324,3 @@ export const useMode = () => {
 
   return { theme };
 };
-
-/* 
-      h1Bold: {
-        fontFamily: ['Montserrat', 'sans-serif', 'bold'].join(','),
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-      },
-      h2Bold: {
-        fontFamily: ['Montserrat', 'sans-serif'].join(','),
-        fontSize: '2rem',
-        fontWeight: 'bold',
-      },
-      h3Bold: {
-        fontFamily: ['Montserrat', 'sans-serif'].join(','),
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-      },
-      h4Bold: {
-        fontFamily: ['Montserrat', 'sans-serif'].join(','),
-        fontSize: '1.25rem',
-        fontWeight: 'bold',
-      },
-      h5Bold: {
-        fontFamily: ['Montserrat', 'sans-serif'].join(','),
-        fontSize: '1rem',
-        fontWeight: 'bold',
-      },
-      h6Bold: {
-        fontFamily: ['Montserrat', 'sans-serif'].join(','),
-        fontSize: '0.875rem',
-        fontWeight: 'bold',
-      },
-
-*/

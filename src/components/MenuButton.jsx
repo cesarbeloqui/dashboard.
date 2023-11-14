@@ -1,20 +1,19 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import { Typography, IconButton } from '@mui/material';
+import { Typography, IconButton, Tooltip, Button, Stack } from '@mui/material';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
-const Item = ({ name, link, icon, onClick }) => {
+const Item = ({ text, link, icon, onClick }) => {
   return (
     <MenuItem onClick={onClick} icon={icon}>
-      <Typography>{name}</Typography>
+      <Typography>{text}</Typography>
     </MenuItem>
   );
 };
 
-const MenuButton = ({ icon, items }) => {
+const MenuButton = ({ icon, items, tip }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -28,12 +27,14 @@ const MenuButton = ({ icon, items }) => {
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
-          <IconButton variant="contained" {...bindTrigger(popupState)}>
-            {icon}
-          </IconButton>
+            <Tooltip title={tip}>
+              <IconButton variant="contained" {...bindTrigger(popupState)}>
+                {icon}
+              </IconButton>
+            </Tooltip>
           <Menu {...bindMenu(popupState)}>
             {items.map((item, index) => {
-              const icon = item.icon()
+              const icon = item.icon;
               return (
                 <MenuItem
                   icon={item.icon}
@@ -52,7 +53,7 @@ const MenuButton = ({ icon, items }) => {
                       color: 'inherit',
                     }}
                   >
-                    {item.name}
+                    {item.text}
                   </Typography>
                 </MenuItem>
               );

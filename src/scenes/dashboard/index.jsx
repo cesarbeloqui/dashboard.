@@ -29,7 +29,6 @@ const Dashboard = () => {
       {/* GRID & CHARTS */}
       <Box>
         {/* CONTENIDO*/}
-
         <Carousel />
       </Box>
     </Box>
