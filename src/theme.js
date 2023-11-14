@@ -187,6 +187,9 @@ export const themeSettings = (mode) => {
               main: colors.redAccent[500],
               light: colors.grey[100],
             },
+            white: {
+              main: 'white',
+            },
           }
         : {
             // valores de la paleta para el modo claro
@@ -194,7 +197,7 @@ export const themeSettings = (mode) => {
               main: colors.primary[100],
             },
             secondary: {
-              main: colors.greenAccent[500],
+              main: colors.green[500],
             },
             neutral: {
               dark: colors.grey[700],
@@ -208,6 +211,9 @@ export const themeSettings = (mode) => {
               dark: colors.grey[700],
               main: colors.redAccent[600],
               light: colors.grey[100],
+            },
+            white: {
+              main: 'black',
             },
           }),
     },
@@ -231,6 +237,15 @@ export const themeSettings = (mode) => {
             '&:hover': {
               backgroundColor: colors.button.hover.background,
               color: colors.button.hover.color,
+            },
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            '& label.Mui-focused': {
+              color: colors.grey[100],
             },
           },
         },
