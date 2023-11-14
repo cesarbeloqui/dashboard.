@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import { Box, IconButton, Typography, useTheme } from '@mui/material';
+import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from '../../theme';
@@ -18,9 +18,27 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import logoProvinciaNegro from '../../assets/imagenes/iso.svg';
 import logoProvinciaBlanco from '../../assets/imagenes/iso_white.svg';
-import imageFondo from '../../assets/imagenes/Captura de pantalla 2023-11-11 125703.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeIsCollapsed } from '../../redux/actions/index';
+
+export const lists = [
+  [
+    { link: '/', text: 'Inicio', icon: <HomeOutlinedIcon /> },
+    /*     { link: '/starred', text: 'Starred', icon: <HomeOutlinedIcon /> },
+    { link: '/send-email', text: 'Send email', icon: <HomeOutlinedIcon /> },
+    { link: '/drafts', text: 'Drafts', icon: <HomeOutlinedIcon /> },
+    { link: '/trash', text: 'Trash', icon: <HomeOutlinedIcon /> }, */
+  ],
+  /*   [
+    { link: '/spam', text: 'Spam', icon: <HomeOutlinedIcon /> },
+    { link: '/all-mail', text: 'All mail', icon: <HomeOutlinedIcon /> },
+    {
+      link: '/important-mail',
+      text: 'Important mail',
+      icon: <HomeOutlinedIcon />,
+    },
+  ], */
+];
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -73,12 +91,7 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar
-        collapsed={isCollapsed}
-        /* image={imageFondo} */
-        onToggle={false}
-        breakPoint="xs"
-      >
+      <ProSidebar collapsed={isCollapsed} onToggle={false} breakPoint="xs">
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <Box
@@ -118,124 +131,35 @@ const Sidebar = () => {
                   />
                 )}
               </Box>
-              <Box textAlign="center">
-                {/*                 <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: '10px 0 0 0' }}
-                >
-                  Cesar Beloqui
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Desarrollador
-                </Typography> */}
-              </Box>
+              <Box textAlign="center"></Box>
             </Box>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : '10%'}>
-            <Item
-              title="Inicio"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            {/*  <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: '15px 0 5px 20px' }}
-            >
-              Data
-            </Typography>
-            <Item
-              title="Manage Team"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Contacts Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: '15px 0 5px 20px' }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: '15px 0 5px 20px' }}
-            >
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
+            {lists.map((list, index) => {
+              const i = index;
+              let divider = null;
+              if (index !== 0) {
+                divider = <Divider />;
+              }
+              return (
+                <Fragment key={i}>
+                  {divider}
+                  {list.map((item) => {
+                    return (
+                      <Item
+                        key={item.text}
+                        title={item.text}
+                        to={item.link}
+                        icon={item.icon}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                    );
+                  })}
+                </Fragment>
+              );
+            })}
           </Box>
         </Menu>
       </ProSidebar>

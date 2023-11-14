@@ -12,11 +12,12 @@ import Line from './scenes/line';
 import Pie from './scenes/pie';
 import FAQ from './scenes/faq';
 import Geography from './scenes/geography';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { Button, CssBaseline, ThemeProvider } from '@mui/material';
 import { useMode } from './theme';
 import Calendar1 from './scenes/calendar/calendar';
 import { useDispatch } from 'react-redux';
 import { sizeWindows } from './redux/actions/index';
+import SwipeableTemporaryDrawer from './scenes/global/SwipeableTemporaryDrawer';
 
 function App() {
   const { theme } = useMode();
@@ -39,6 +40,7 @@ function App() {
 
         <main className="content">
           <Topbar setIsSidebar={setIsSidebar} />
+          <SwipeableTemporaryDrawer />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             {/*               <Route path="/team" element={<Team />} />

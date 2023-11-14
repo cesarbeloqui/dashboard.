@@ -15,6 +15,7 @@ import MenuButton from '../../components/MenuButton';
 import AR from '../../assets/imagenes/AR.svg';
 import US from '../../assets/imagenes/US.svg';
 import BR from '../../assets/imagenes/BR.svg';
+import SwipeableTemporaryDrawer from '../global/SwipeableTemporaryDrawer';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -82,19 +83,20 @@ const Topbar = () => {
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      <Box display="flex" flexDirection="row">
-        <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
-      </Box>
+      {width > 480 && (
+        <Box display="flex" flexDirection="row">
+          <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
+        </Box>
+      )}
 
       <Box display="flex" justifyContent="flex-end">
         {width < 480 && (
-          <IconButton
-            onClick={() => {
-              dispatch(changeIsCollapsed());
-            }}
-          >
-            <MenuOutlinedIcon />
-          </IconButton>
+          <>
+            <SwipeableTemporaryDrawer>
+              <MenuOutlinedIcon />
+            </SwipeableTemporaryDrawer>
+            <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
+          </>
         )}
         {/* SEARCH BAR */}
         <Box
