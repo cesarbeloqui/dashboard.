@@ -8,8 +8,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
+
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { lists } from './Sidebar';
@@ -49,9 +49,7 @@ export default function TemporaryDrawer({ children }) {
                   return (
                     <ListItem disablePadding key={item.link}>
                       <ListItemButton component={Link} to={item.link}>
-                        <ListItemIcon>
-                          {item.icon}
-                        </ListItemIcon>
+                        <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.text} />
                       </ListItemButton>
                     </ListItem>
@@ -70,6 +68,26 @@ export default function TemporaryDrawer({ children }) {
       <React.Fragment key="left">
         <IconButton onClick={toggleDrawer(true)}>{children}</IconButton>
         <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+          <List
+            sx={{
+              display: 'flex',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                transform: 'rotate(180deg)',
+                margin: '0 0 0 auto',
+                padding: '0px 0px 20px 20px',
+                /* backgroundColor: "blue" */
+              }}
+            >
+              <IconButton onClick={toggleDrawer(false)}>
+                <KeyboardTabIcon />
+              </IconButton>
+            </Box>
+          </List>
           {list()}
         </Drawer>
       </React.Fragment>

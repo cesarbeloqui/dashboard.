@@ -15,7 +15,7 @@ import MenuButton from '../../components/MenuButton';
 import AR from '../../assets/imagenes/AR.svg';
 import US from '../../assets/imagenes/US.svg';
 import BR from '../../assets/imagenes/BR.svg';
-import SwipeableTemporaryDrawer from '../global/SwipeableTemporaryDrawer';
+import SwipeableTemporaryDrawer from "../global/SwipeableTemporaryDrawer"
 
 const Topbar = () => {
   const theme = useTheme();
@@ -90,11 +90,11 @@ const Topbar = () => {
       )}
 
       <Box display="flex" justifyContent="flex-end">
-        {width < 480 && (
+        { width < 480 && (
           <>
             <SwipeableTemporaryDrawer>
               <MenuOutlinedIcon />
-            </SwipeableTemporaryDrawer>
+              </SwipeableTemporaryDrawer>
             <MenuButton icon={<LanguageIcon />} items={itemsMenuLenguaje} />
           </>
         )}
